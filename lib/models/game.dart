@@ -1,12 +1,15 @@
+import 'dart:math';
+
 import 'package:offline_uno/models/board.dart';
 import 'package:offline_uno/models/deck.dart';
 import 'package:offline_uno/models/player.dart';
 
 class Game {
-  final Deck _deck = Deck()
-    ..init()
-    ..shuffle();
+  late final Deck _deck;
+  late final Board _board;
   final List<Person> _players = [];
+  late int _currentPlayerIndex;
+  var _direction = 1;
 
   Game fromNames(List<String> names) {
     if (names.length < 2) {
@@ -15,15 +18,21 @@ class Game {
     if (names.length > 10) {
       throw Exception('At most 10 players are allowed');
     }
-    Board board = Board(deck: _deck)..init();
+
+    _deck = Deck()
+      ..init()
+      ..shuffle();
+
+    _board = Board(deck: _deck)..init();
+
     for (String name in names) {
-      _players.add(Person(
-        name: name,
-        board: board,
-        deck: _deck,
-      )..init());
+      var person = Person(name: name, board: _board, deck: _deck);
+      person.init();
+      _players.add(person);
     }
+
+    _currentPlayerIndex = Random().nextInt(_players.length);
+
     return this;
   }
-
 }
