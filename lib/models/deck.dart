@@ -6,7 +6,7 @@ class Deck {
 
   void init() {
     for (Color color in Color.values) {
-      for (Symbol symbol in nonWildSymbols) {
+      for (Symbol symbol in Symbol.nonWildSymbols) {
         if (symbol != Symbol.zero) {
           cards.add(Card(color, symbol));
         }
