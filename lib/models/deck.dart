@@ -2,33 +2,33 @@ import 'card.dart';
 
 
 class Deck {
-  final List<Card> cards = [];
+  final List<Card> _cards = [];
 
   void init() {
     for (Color color in Color.values) {
       for (Symbol symbol in Symbol.nonWildSymbols) {
         if (symbol != Symbol.zero) {
-          cards.add(Card(color, symbol));
+          _cards.add(Card(color, symbol));
         }
-        cards.add(Card(color, symbol));
+        _cards.add(Card(color, symbol));
       }
     }
     for (int i = 0; i < 4; i++) {
-      cards.add(const Card(null, Symbol.wild));
-      cards.add(const Card(null, Symbol.wildDrawFour));
+      _cards.add(const Card(null, Symbol.wild));
+      _cards.add(const Card(null, Symbol.wildDrawFour));
     }
     shuffle();
   }
 
   void shuffle() {
-    cards.shuffle();
+    _cards.shuffle();
   }
 
   Card draw() {
-    return cards.removeLast();
+    return _cards.removeLast();
   }
 
   void add(Card card) {
-    cards.add(card);
+    _cards.add(card);
   }
 }

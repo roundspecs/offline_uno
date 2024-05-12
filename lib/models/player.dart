@@ -4,15 +4,15 @@ import 'deck.dart';
 
 class Person {
   final String name;
-  final Deck deck;
-  final Board board;
-  final List<Card> hand = [];
+  final Deck _deck;
+  final Board _board;
+  final List<Card> _hand = [];
 
   Person({
     required this.name,
-    required this.board,
-    required this.deck,
-  });
+    required Board board,
+    required Deck deck,
+  }) : _board = board, _deck = deck;
 
   void init() {
     draw(count: 7);
@@ -20,12 +20,12 @@ class Person {
 
   void draw({int count = 1}) {
     for (int i = 0; i < count; i++) {
-      hand.add(deck.draw());
+      _hand.add(_deck.draw());
     }
   }
 
   void play(int index) {
-    final card = hand.removeAt(index);
-    board.play(card);
+    final card = _hand.removeAt(index);
+    _board.play(card);
   }
 }

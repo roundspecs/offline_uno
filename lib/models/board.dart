@@ -3,18 +3,18 @@ import 'card.dart';
 
 class Board {
   Card? topCard;
-  final Deck deck;
+  final Deck _deck;
 
-  Board({required this.deck});
+  Board({required Deck deck}) : _deck = deck;
 
   void init() {
-    topCard = deck.draw();
+    topCard = _deck.draw();
     while (topCard!.symbol == Symbol.wild ||
         topCard!.symbol == Symbol.wildDrawFour) {
-      deck
+      _deck
         ..add(topCard!)
         ..shuffle();
-      topCard = deck.draw();
+      topCard = _deck.draw();
     }
   }
 
@@ -25,7 +25,7 @@ class Board {
     if (card.color != topCard!.color && card.symbol != topCard!.symbol) {
       throw Exception('Invalid card');
     }
-    deck.add(topCard!);
+    _deck.add(topCard!);
     topCard = card;
   }
 }
