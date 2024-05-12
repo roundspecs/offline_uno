@@ -2,19 +2,20 @@ import 'board.dart';
 import 'card.dart';
 import 'deck.dart';
 
-class Person {
+class Player {
   final String name;
   final Deck _deck;
   final Board _board;
   final List<Card> _hand = [];
   var _saidUno = false;
 
-  Person({
+  Player({
     required this.name,
     required Board board,
     required Deck deck,
-  }) : _board = board, _deck = deck;
-  
+  })  : _board = board,
+        _deck = deck;
+
   int get handSize => _hand.length;
 
   void init() {
@@ -47,5 +48,4 @@ class Person {
     }
     return false;
   }
-
 }

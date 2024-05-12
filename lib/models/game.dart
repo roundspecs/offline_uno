@@ -7,9 +7,9 @@ import 'package:offline_uno/models/player.dart';
 class Game {
   late final Deck _deck;
   late final Board _board;
-  final List<Person> _players = [];
+  final List<Player> _players = [];
   late int _currentPlayerIndex;
-  var _direction = 1;
+  final _direction = 1;
 
   Game fromNames(List<String> names) {
     if (names.length < 2) {
@@ -26,9 +26,9 @@ class Game {
     _board = Board(deck: _deck)..init();
 
     for (String name in names) {
-      var person = Person(name: name, board: _board, deck: _deck);
-      person.init();
-      _players.add(person);
+      var player = Player(name: name, board: _board, deck: _deck);
+      player.init();
+      _players.add(player);
     }
 
     _currentPlayerIndex = Random().nextInt(_players.length);
